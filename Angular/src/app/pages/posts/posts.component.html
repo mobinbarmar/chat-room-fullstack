@@ -1,0 +1,15 @@
+<button routerLink="/posts/add-post" class="btn btn-secondary btn-lg">Add Post</button>
+
+
+<ng-container *ngFor="let post of posts$|async">
+    <h1>{{ post.title }}</h1>
+    <span>{{ post.createdAt|date }}</span>
+    <button [routerLink]="['/posts/post-description', post.id]" class="btn btn-primary btn-sm">Show Post Description</button>
+    <button class="btn btn-danger btn-sm" (click)="deletePost(post.id)" *ngIf="!deleteFlag">Delete</button>
+
+    <div *ngIf="deleteFlag && post.id == deletedPostId">
+        <h1>Do you wanna delete this post?</h1>
+        <button class="btn btn-success" (click)="deletePostConfirmed(post.id)">Yse</button>
+        <button class="btn btn-danger" (click)="deleteFlag = false">No</button>
+    </div>
+</ng-container>

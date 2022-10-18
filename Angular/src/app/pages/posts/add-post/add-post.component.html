@@ -1,0 +1,14 @@
+<div [formGroup]="postForm">
+    <div>
+        <label for="">Title</label>
+        <input type="text" formControlName="title">
+    </div>
+
+    <div>
+        <label for="">Description</label>
+        <input type="text" formControlName="description">
+    </div>
+
+    <button (click)="addPost()" class="btn btn-success">Post</button>
+    <button (click)="_loc.back()" class="btn btn-danger">Back</button>
+</div>

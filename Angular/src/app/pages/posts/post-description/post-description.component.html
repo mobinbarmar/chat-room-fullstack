@@ -1,0 +1,24 @@
+<div *ngIf="post$|async as post">
+    <div *ngIf="!editFlag">
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.description }}</p>
+        <span>{{ post.createdAt|date }}</span>
+        <button (click)="editFlag = true" class="btn btn-warning">Edit</button>
+        <button (click)="_loc.back()" class="btn btn-danger">Back</button>
+        <button (click)="deleteFlag = true" class="btn btn-danger" *ngIf="!deleteFlag">Delete</button>
+
+        <div *ngIf="deleteFlag">
+            <h1>Do you wanna delete this post?</h1>
+            <button class="btn btn-success" (click)="deletePost(post.id)">Yes</button>
+            <button class="btn btn-danger" (click)="deleteFlag = false">No</button>
+        </div>
+    </div>
+
+    <div *ngIf="editFlag">
+        <input type="text" [value]="post.title" #ltitle><br>
+        <input type="text" [value]="post.description" #ldescription><br>
+        <span>{{ post.createdAt|date }}</span><br>
+        <button (click)="editPost(post.id, ltitle.value, ldescription.value)" class="btn btn-success">Finish</button>
+        <button (click)="editFlag = false" class="btn btn-warning">Cancle</button>
+    </div>
+</div>

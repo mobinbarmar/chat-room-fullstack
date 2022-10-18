@@ -1,0 +1,43 @@
+<div class="d-flex">    
+    <div class="col-12">
+        <div style="height: 90vh; overflow: auto;" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+            <div *ngFor="let message of messages$|async" class="my-4 container">
+                <div *ngIf="message.name == name" class="d-flex flex-column align-items-start bg-info w-25 rounded p-2 " dir="rtl">
+                    <h6>{{ message.name }}</h6>
+                    <div *ngIf="!editFlag">
+                        <h4>{{ message.message }}</h4>
+                    </div>
+                    <div *ngIf="editFlag" [formGroup]="myForm">
+                        <input type="text" [value]="message.message" formControlName="myMessage">
+                    </div>
+                    <small>{{ message.createdAt|date }}</small>
+
+                    <div class="d-flex justify-content-end w-100" *ngIf="!editFlag">
+                        <a class="text-danger" style="cursor: pointer;" (click)="deleteMessage(message.id)">DELETE</a>
+                        <a class="text-warning mx-3" style="cursor: pointer;" (click)="editMode()">EDIT</a>
+                    </div>
+                    <div class="d-flex justify-content-end w-100" *ngIf="editFlag">
+                        <a class="text-danger ms-3" style="cursor: pointer;" (click)="editMode()">Cancle</a>
+                        <a class="text-success ms-3" style="cursor: pointer;" (click)="editMessage(message.id, message.name)">Finish</a>
+                    </div>
+                </div>
+                
+                <div *ngIf="message.name != name" class="d-flex flex-column align-items-end">
+                    <div class="col-4 shadow rounded p-2" dir="rtl">
+                        <h6>{{ message.name }}</h6>
+                        <h4>{{ message.message }}</h4>
+                        <small>{{ message.createdAt|date }}</small>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div>
+            <label for="">Message</label>
+            <div class="d-flex">
+                <input type="text" class="form-control" #lmessage (keyup.enter)="[sendMessage(lmessage.value), lmessage.value = '']">
+                <button class="btn btn-success" (click)="sendMessage(lmessage.value)">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
