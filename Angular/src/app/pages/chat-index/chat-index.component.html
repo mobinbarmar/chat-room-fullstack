@@ -1,4 +1,17 @@
-<button class="btn btn-primary btn-lg mx-3 mt-5" (click)="gust('Mobin')">Mobin</button>
+<!-- <button class="btn btn-primary btn-lg mx-3 mt-5" (click)="gust('Mobin')">Mobin</button>
 <button class="btn btn-primary btn-lg mx-3 mt-5" (click)="gust('Sina')">Sina</button>
 <button class="btn btn-primary btn-lg mx-3 mt-5" (click)="gust('Faezeh')">Faezeh</button>
-<button class="btn btn-primary btn-lg mx-3 mt-5" (click)="gust('Mehdi')">Mehdi</button>
+<button class="btn btn-primary btn-lg mx-3 mt-5" (click)="gust('Mehdi')">Mehdi</button> -->
+
+
+<div>
+    <label for="">type your name</label>
+    <input type="text" class="form-control" (keyup.enter)="gust(lgustName.value)" #lgustName>
+    <button class="btn btn-primary btn-lg" (click)="gust(lgustName.value)">Chat!</button>
+</div>
+
+<div class="d-flex">
+    <div *ngFor="let user of distinctUsers$|async">
+        <button class="btn btn-secondary me-3 mt-5" (click)="gust(user.name)">{{ user.name }}</button>
+    </div>
+</div>

@@ -1,3 +1,4 @@
+const { Sequelize } = require('sequelize');
 const chatModel = require('../models/chat.models');
 
 exports.addMessage = async (req, res) => {
@@ -44,5 +45,19 @@ exports.editMessage = async (req, res) => {
     } catch (err) {
         // res.status(500).send(err)
         console.log(err);
+    }
+}
+
+exports.getDistinctUsers = async (req, res, next) => {
+    try {
+        const distinctedUsers = await chatModel.findAll({ 
+            attributes: [
+                [Sequelize.fn('DISTINCT', Sequelize.col('name')), 'name']
+            ]
+         })
+        res.status(200).json(distinctedUsers)
+
+    } catch (err) {
+        next(err)
     }
 }

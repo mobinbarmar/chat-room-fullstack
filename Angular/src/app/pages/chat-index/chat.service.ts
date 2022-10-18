@@ -24,4 +24,8 @@ export class ChatService {
   editMessage(body: any){
     return this.http.put(environment.SERVER + '/chat', body)
   }
+
+  getDistinctUsers(){
+    return this.http.get(environment.SERVER + '/chat/distinct-users')
+  }
 }

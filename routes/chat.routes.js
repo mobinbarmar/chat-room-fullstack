@@ -12,4 +12,6 @@ router.delete('/:id', chatController.deleteMessage)
 
 router.put('/', chatController.editMessage)
 
+router.get('/distinct-users', chatController.getDistinctUsers)
+
 module.exports = router
